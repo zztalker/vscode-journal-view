@@ -1,182 +1,206 @@
 {
-    "name": "vscode-journal-view",
-    "displayName": "vscode-journal-view",
-    "icon": "resources/vscode-journal.png",
-    "description": "Extends the vscode-journal extension with a viewlet",
-    "version": "0.0.25",
-    "publisher": "Gruntfuggly",
-    "repository": "https://github.com/Gruntfuggly/vscode-journal-view",
-    "engines": {
-        "vscode": "^1.5.0"
-    },
-    "categories": [
-        "Other"
-    ],
-    "activationEvents": [
-        "*"
-    ],
-    "main": "./extension",
-    "contributes": {
-        "viewsContainers": {
-            "activitybar": [
-                {
-                    "id": "vscode-journal-view",
-                    "title": "Journal",
-                    "icon": "resources/journal-container.svg"
-                }
-            ]
-        },
-        "views": {
-            "explorer": [
-                {
-                    "id": "vscode-journal-view-explorer",
-                    "name": "Journal",
-                    "when": "journal-tree-has-content && vscode-journal-view-in-explorer"
-                }
-            ],
-            "vscode-journal-view": [
-                {
-                    "id": "vscode-journal-view",
-                    "name": "Journal"
-                }
-            ]
-        },
-        "menus": {
-            "view/title": [
-                {
-                    "command": "vscode-journal-view.today",
-                    "when": "view == vscode-journal-view",
-                    "group": "navigation@0"
-                },
-                {
-                    "command": "vscode-journal-view.todayInExplorer",
-                    "when": "view == vscode-journal-view-explorer",
-                    "group": "navigation@0"
-                },
-                {
-                    "command": "vscode-journal-view.expand",
-                    "when": "view =~ /vscode-journal-view/ && vscode-journal-view-show-expand",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "vscode-journal-view.collapse",
-                    "when": "view =~ /vscode-journal-view/ && vscode-journal-view-show-collapse",
-                    "group": "navigation@1"
-                },
-                {
-                    "command": "vscode-journal-view.search",
-                    "when": "view =~ /vscode-journal-view/ && !vscode-journal-view-is-filtered",
-                    "group": "navigation@2"
-                },
-                {
-                    "command": "vscode-journal-view.clearFilter",
-                    "when": "view =~ /vscode-journal-view/ && vscode-journal-view-is-filtered",
-                    "group": "navigation@2"
-                },
-                {
-                    "command": "vscode-journal-view.refresh",
-                    "when": "view =~ /vscode-journal-view/",
-                    "group": "navigation@3"
-                }
-            ]
-        },
-        "commands": [
-            {
-                "command": "vscode-journal-view.today",
-                "title": "Today",
-                "category": "vscode-journal-view",
-                "icon": {
-                    "dark": "resources/icons/dark/journal-entry.svg",
-                    "light": "resources/icons/light/journal-entry.svg"
-                }
-            },
-            {
-                "command": "vscode-journal-view.todayInExplorer",
-                "title": "Today",
-                "category": "vscode-journal-view",
-                "icon": {
-                    "dark": "resources/icons/dark/journal-entry.svg",
-                    "light": "resources/icons/light/journal-entry.svg"
-                }
-            },
-            {
-                "command": "vscode-journal-view.refresh",
-                "title": "Refresh",
-                "category": "vscode-journal-view",
-                "icon": {
-                    "dark": "resources/icons/dark/refresh.svg",
-                    "light": "resources/icons/light/refresh.svg"
-                }
-            },
-            {
-                "command": "vscode-journal-view.search",
-                "title": "Search",
-                "category": "vscode-journal-view",
-                "icon": {
-                    "dark": "resources/icons/dark/filter.svg",
-                    "light": "resources/icons/light/filter.svg"
-                }
-            },
-            {
-                "command": "vscode-journal-view.clearFilter",
-                "title": "Clear",
-                "category": "vscode-journal-view",
-                "icon": {
-                    "dark": "resources/icons/dark/clear-filter.svg",
-                    "light": "resources/icons/light/clear-filter.svg"
-                }
-            },
-            {
-                "command": "vscode-journal-view.expand",
-                "title": "Expand all",
-                "category": "vscode-journal-view",
-                "icon": {
-                    "dark": "resources/icons/dark/expand.svg",
-                    "light": "resources/icons/light/expand.svg"
-                }
-            },
-            {
-                "command": "vscode-journal-view.collapse",
-                "title": "Collapse all",
-                "category": "vscode-journal-view",
-                "icon": {
-                    "dark": "resources/icons/dark/collapse.svg",
-                    "light": "resources/icons/light/collapse.svg"
-                }
-            }
-        ],
-        "configuration": {
-            "type": "object",
-            "title": "Journal View",
-            "properties": {
-                "vscode-journal-view.expanded": {
-                    "type": "boolean",
-                    "description": "Set to true if you want the view to be initially expanded",
-                    "default": false
-                },
-                "vscode-journal-view.showInExplorer": {
-                    "type": "boolean",
-                    "description": "If true, show the view in the explorer. Set to false if you only want to use the dedicated view in the activity bar",
-                    "default": true
-                },
-                "vscode-journal-view.debug": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Turn on diagnostic logging (reload required)"
-                },
-                "vscode-journal-view.showNonJournalFiles": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Show files which are not in the standard journal structure"
-                }
-            }
-        }
-    },
-    "scripts": {},
-    "extensionDependencies": [
-        "pajoma.vscode-journal"
-    ],
-    "dependencies": {
-        "find-in-file": "^1.0.1"
-    }
+	"name": "vscode-journal-view",
+	"displayName": "vscode-journal-view",
+	"icon": "resources/vscode-journal.png",
+	"description": "Extends the vscode-journal extension with a viewlet",
+	"version": "0.0.25",
+	"publisher": "Gruntfuggly",
+	"repository": "https://github.com/Gruntfuggly/vscode-journal-view",
+	"engines": {
+		"vscode": "^1.5.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"*"
+	],
+	"main": "./extension",
+	"contributes": {
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "vscode-journal-view",
+					"title": "Journal",
+					"icon": "resources/journal-container.svg"
+				}
+			]
+		},
+		"views": {
+			"explorer": [
+				{
+					"id": "vscode-journal-view-explorer",
+					"name": "Journal",
+					"when": "journal-tree-has-content && vscode-journal-view-in-explorer"
+				}
+			],
+			"vscode-journal-view": [
+				{
+					"id": "vscode-journal-view",
+					"name": "Journal"
+				}
+			]
+		},
+		"menus": {
+			"view/title": [
+				{
+					"command": "vscode-journal-view.today",
+					"when": "view == vscode-journal-view",
+					"group": "navigation@0"
+				},
+				{
+					"command": "vscode-journal-view.todos",
+					"when": "view == vscode-journal-view",
+					"group": "navigation@0"
+				},
+				{
+					"command": "vscode-journal-view.todayInExplorer",
+					"when": "view == vscode-journal-view-explorer",
+					"group": "navigation@0"
+				},
+				{
+					"command": "vscode-journal-view.expand",
+					"when": "view =~ /vscode-journal-view/ && vscode-journal-view-show-expand",
+					"group": "navigation@1"
+				},
+				{
+					"command": "vscode-journal-view.collapse",
+					"when": "view =~ /vscode-journal-view/ && vscode-journal-view-show-collapse",
+					"group": "navigation@1"
+				},
+				{
+					"command": "vscode-journal-view.search",
+					"when": "view =~ /vscode-journal-view/ && !vscode-journal-view-is-filtered",
+					"group": "navigation@2"
+				},
+				{
+					"command": "vscode-journal-view.clearFilter",
+					"when": "view =~ /vscode-journal-view/ && vscode-journal-view-is-filtered",
+					"group": "navigation@2"
+				},
+				{
+					"command": "vscode-journal-view.refresh",
+					"when": "view =~ /vscode-journal-view/",
+					"group": "navigation@3"
+				}
+			]
+		},
+		"commands": [
+			{
+				"command": "vscode-journal-view.today",
+				"title": "Today",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/journal-entry.svg",
+					"light": "resources/icons/light/journal-entry.svg"
+				}
+			},
+			{
+				"command": "vscode-journal-view.todos",
+				"title": "TODOs",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/journal-entry.svg",
+					"light": "resources/icons/light/journal-entry.svg"
+				}
+			},
+			{
+				"command": "vscode-journal-view.todayInExplorer",
+				"title": "Today",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/journal-entry.svg",
+					"light": "resources/icons/light/journal-entry.svg"
+				}
+			},
+			{
+				"command": "vscode-journal-view.refresh",
+				"title": "Refresh",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/refresh.svg",
+					"light": "resources/icons/light/refresh.svg"
+				}
+			},
+			{
+				"command": "vscode-journal-view.search",
+				"title": "Search",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/filter.svg",
+					"light": "resources/icons/light/filter.svg"
+				}
+			},
+			{
+				"command": "vscode-journal-view.clearFilter",
+				"title": "Clear",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/clear-filter.svg",
+					"light": "resources/icons/light/clear-filter.svg"
+				}
+			},
+			{
+				"command": "vscode-journal-view.expand",
+				"title": "Expand all",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/expand.svg",
+					"light": "resources/icons/light/expand.svg"
+				}
+			},
+			{
+				"command": "vscode-journal-view.collapse",
+				"title": "Collapse all",
+				"category": "vscode-journal-view",
+				"icon": {
+					"dark": "resources/icons/dark/collapse.svg",
+					"light": "resources/icons/light/collapse.svg"
+				}
+			}
+		],
+		"configuration": {
+			"type": "object",
+			"title": "Journal View",
+			"properties": {
+				"vscode-journal-view.expanded": {
+					"type": "boolean",
+					"description": "Set to true if you want the view to be initially expanded",
+					"default": false
+				},
+				"vscode-journal-view.showInExplorer": {
+					"type": "boolean",
+					"description": "If true, show the view in the explorer. Set to false if you only want to use the dedicated view in the activity bar",
+					"default": true
+				},
+				"vscode-journal-view.debug": {
+					"type": "boolean",
+					"default": false,
+					"description": "Turn on diagnostic logging (reload required)"
+				},
+				"vscode-journal-view.showNonJournalFiles": {
+					"type": "boolean",
+					"default": false,
+					"description": "Show files which are not in the standard journal structure"
+				},
+				"vscode-journal-view.collectNotFinishedTasks":{
+					"type": "boolean",
+					"default": false,
+					"description": "Show unfinished tasks by writing todos.md file in root folder"
+				}
+			}
+		}
+	},
+	"scripts": {},
+	"extensionDependencies": [
+		"pajoma.vscode-journal"
+	],
+	"dependencies": {
+		"find-in-file": "^1.0.1"
+	},
+	"__metadata": {
+		"id": "4e5103c7-28d4-4a64-81e1-a912f5891900",
+		"publisherDisplayName": "Gruntfuggly",
+		"publisherId": "d4906d2e-f2ee-492d-9c7c-02b6160599ec"
+	}
 }

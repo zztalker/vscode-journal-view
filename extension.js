@@ -136,6 +136,10 @@ function activate( context )
                     provider.add( rootFolder, path );
                 } );
             }
+            if ( vscode.workspace.getConfiguration( 'vscode-journal-view' ).collectNotFinishedTasks )
+            {
+                provider.addNotFinishedTasks( rootFolder );
+            }
             provider.refresh();
         } );
     }
@@ -238,6 +242,11 @@ function activate( context )
         vscode.workspace.getConfiguration( 'vscode-journal-view' ).update( 'expanded', true, false );
     }
 
+    function showTODOs()
+    {
+        console.log("ToDos!");
+    }
+
     function register()
     {
         vscode.window.registerTreeDataProvider( 'vscode-journal-view', provider );
@@ -298,6 +307,7 @@ function activate( context )
         } ) );
 
         context.subscriptions.push( vscode.commands.registerCommand( 'vscode-journal-view.clearFilter', clearFilter ) );
+        context.subscriptions.push( vscode.commands.registerCommand( 'vscode-journal-view.todos', showTODOs ) );
 
         function revealButtonPressed( revealInExplorer )
         {
